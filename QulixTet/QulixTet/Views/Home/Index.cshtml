@@ -1,0 +1,92 @@
+﻿@model IEnumerable<QulixTet.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Тествовое задание</h2>
+
+<p>
+    @Html.ActionLink("Добавить работника", "CreateEmployee")
+</p>
+<table class="table">
+    <tr>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+        <th>Должность</th>
+        <th>Дата приема на работу</th>
+        <th>Компания</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SurName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MiddleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmploymentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Изменить", "EditEmployee", new { id = item.Id }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id, tableName = "Employees" })
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("Добавить компанию", "CreateCompany")
+</p>
+<table class="table">
+    <tr>
+        <th>Идентификатор</th>
+        <th>Название</th>
+        <th>Размер</th>
+        <th>Вид деятельности</th>
+        <th>Организационно-правовая форма</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in ViewBag.companies)
+    {
+        <tr>
+            <td>
+                @item.Id
+            </td>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.CompanySize
+            </td>
+            <td>
+                @item.KindOfActivity
+            </td>
+            <td>
+                @item.LegalForm
+            </td>
+            <td>
+                @Html.ActionLink("Изменить", "EditCompany", new { id = item.Id }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id, tableName = "Companies"})
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p style="color:blue">@ViewBag.message</p>
+
